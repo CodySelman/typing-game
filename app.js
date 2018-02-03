@@ -3,6 +3,7 @@
 const  playerInputForm = document.getElementById('userInput');
 let currentWord = 'type this';
 const currentWordForm = document.getElementById('current-word');
+const challengeWords = ['firstWord', 'secondWord', 'thirdWord'];
 
 // Event Listeners
 
@@ -17,11 +18,19 @@ instantiateWord();
 function submitText(e){
     e.preventDefault();
     const playerInput = playerInputForm.value;
-    const currentWord = currentWordForm.innerHtml;
-    console.log(currentWord);
+    if (playerInput === currentWordForm.innerHTML){
+        currentWordForm.innerHtml = '';
+        instantiateWord;
+    }
 
 }
 
 function instantiateWord() {
-    currentWordForm.innerHTML = 'First Word';
+    currentWordForm.innerHTML = randomWord();
+}
+
+function randomWord(){
+    const randomNumber = (Math.floor(Math.random() * challengeWords.length));
+    const newWord = challengeWords[randomNumber];
+    return newWord;
 }
