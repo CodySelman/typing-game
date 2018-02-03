@@ -19,8 +19,9 @@ function submitText(e){
     e.preventDefault();
     const playerInput = playerInputForm.value;
     if (playerInput === currentWordForm.innerHTML){
+        console.log('success');
         currentWordForm.innerHtml = '';
-        instantiateWord;
+        instantiateWord();
     }
 
 }
