@@ -22,12 +22,14 @@ function submitText(e){
         console.log('success');
         currentWordForm.innerHtml = '';
         instantiateWord();
+        playerInputForm.value = '';
     }
 
 }
 
 function instantiateWord() {
     currentWordForm.innerHTML = randomWord();
+
 }
 
 function randomWord(){
