@@ -1,18 +1,27 @@
 // Variables
 
-const  playerInput = document.getElementById('userInput');
+const  playerInputForm = document.getElementById('userInput');
+let currentWord = 'type this';
+const currentWordForm = document.getElementById('current-word');
 
 // Event Listeners
 
-playerInput.addEventListener('input', submitText)
+playerInputForm.addEventListener('input', submitText);
 
 // Initialize
 
-
+instantiateWord();
 
 // Functions
 
 function submitText(e){
     e.preventDefault();
-    console.log(playerInput.value);
+    const playerInput = playerInputForm.value;
+    const currentWord = currentWordForm.innerHtml;
+    console.log(currentWord);
+
+}
+
+function instantiateWord() {
+    currentWordForm.innerHTML = 'First Word';
 }
