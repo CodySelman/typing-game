@@ -1,23 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Typing Game</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Typing Game</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css">
+    </head>
 
-<body>
+    <body>
+        <header class='h-10'>
+            <p id='score'>Score: </p>
+        </header>
 
-    <p id='current-word' class='display-4 position-fixed left-500'></p>
+        <main class='h-70'>
+            <div class="h-20">
+                
+            </div>
+            <div id='div2' class="h-20">
 
-    <form class='inputForm w-100 d-flex justify-content-center' autocomplete='off'>
-        <input type="text" id='userInput' class='display-4 bg-dark text-green w-100 text-center' autofocus>
-    </form>
+            </div>
+            <div class="h-20">
 
-    <script src='challengeWords.js'></script>
-    <script src='app.js'></script>
-</body>
+            </div>
+            <div class="h-20">
+
+            </div>
+            <div class="h-20">
+
+            </div>
+            
+        </main>
+
+        <footer class='h-20'>
+            <form class='inputForm w-100 d-flex justify-content-center' autocomplete='off'>
+                <input type="text" id='userInput' class='display-4 bg-dark text-green w-100 text-center' autofocus>
+            </form>
+        </footer>
+        <script src='challengeWords.js'></script>
+        <script src='app.js'></script>
+    </body>
 </html>

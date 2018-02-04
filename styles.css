@@ -22,3 +22,15 @@ body, html {
 .left-500{
     left: -500px;
 }
+
+.h-20 {
+    height: 20%;
+}
+
+.h-10 {
+    height: 10%;
+}
+
+.h-70 {
+    height: 70%;
+}
