@@ -1,0 +1,24 @@
+body, html {
+    min-height: 100%;
+    height: 100%;
+    background-color: #282828;
+    color: #33ff00;
+}
+
+.inputForm {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+}
+
+.bg-dark {
+    background-color: #282828;
+}
+
+.text-green {
+    color: #33ff00;
+}
+
+.w-100 {
+    width: 100%;
+}
