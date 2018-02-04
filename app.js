@@ -26,8 +26,8 @@ function instantiateWord() {
     var node = document.createTextNode(challengeWords[random(challengeWords.length)]);
     para.appendChild(node);
     para.id = wordId;
-    para.classList.add('display-4', 'position-fixed', 'left-500');
-    var element = document.getElementById('div2');
+    para.classList.add('display-4', 'position-fixed', 'hidden-text');
+    var element = document.getElementById('col1');
     element.appendChild(para);
     scrollText(para);
 }
@@ -46,14 +46,14 @@ function checkAnswer(){
 }
 
 function scrollText(e){
-    let pos = -500;
+    let pos = windowHeight;
     var id = setInterval(scroll, 10);
     function scroll(){
-        if (pos >= windowWidth){
+        if (pos <= -200){
             clearInterval(id);
         } else {
-            pos += 5;
-            e.style.left = pos + 'px';
+            pos -= 5;
+            e.style.bottom = pos + 'px';
         }
     }
 }

@@ -23,6 +23,10 @@ body, html {
     left: -500px;
 }
 
+.hidden-text {
+    bottom: -500px;
+}
+
 .h-20 {
     height: 20%;
 }
