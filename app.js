@@ -7,7 +7,7 @@ const challengeWords = ["a","ability","able","about","above","accept","according
 
 // Event Listeners
 
-playerInputForm.addEventListener('input', submitText);
+playerInputForm.addEventListener('input', correctAnswer);
 
 // Initialize
 
@@ -18,18 +18,20 @@ instantiateWord();
 function random(e){
     return (Math.floor(Math.random() * e));
 }
-function submitText(e){
-    e.preventDefault();
-    const playerInput = playerInputForm.value;
-    if (playerInput === currentWordForm.innerHTML){
+
+function instantiateWord() {
+    currentWordForm.innerHTML = challengeWords[random(challengeWords.length)];
+}
+
+function correctAnswer(e){
+    if (playerInputForm.value === currentWordForm.innerHTML){
         console.log('success');
         currentWordForm.innerHtml = '';
         instantiateWord();
         playerInputForm.value = '';
     }
-
 }
 
-function instantiateWord() {
-currentWordForm.innerHTML = challengeWords[random(challengeWords.length)];
+function scrollText(){
+    
 }
