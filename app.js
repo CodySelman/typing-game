@@ -15,6 +15,9 @@ instantiateWord();
 
 // Functions
 
+function random(e){
+    return (Math.floor(Math.random() * e));
+}
 function submitText(e){
     e.preventDefault();
     const playerInput = playerInputForm.value;
@@ -28,12 +31,5 @@ function submitText(e){
 }
 
 function instantiateWord() {
-    currentWordForm.innerHTML = randomWord();
-
-}
-
-function randomWord(){
-    const randomNumber = (Math.floor(Math.random() * challengeWords.length));
-    const newWord = challengeWords[randomNumber];
-    return newWord;
+currentWordForm.innerHTML = challengeWords[random(challengeWords.length)];
 }
