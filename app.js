@@ -73,7 +73,6 @@ function scrollText(){
         pos = Number(pos);
         if (pos <= -100){
             currentWords[i].parentNode.removeChild(currentWords[i]);
-            currentWords.splice(i, 1);
             lives -= 1;
             livesText.innerHTML = 'Lives: ' + lives;
             if (lives <= 0){
@@ -85,7 +84,6 @@ function scrollText(){
             pos -= fallSpeed;
             currentWords[i].style.bottom = pos + 'px';
         }
-        console.log(typeof(pos));
     }
 }
 
