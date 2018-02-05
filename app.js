@@ -17,7 +17,7 @@ const windowHeight = window.innerHeight;
 
 let score = 0;
 let lives = 3;
-let fallSpeed = 5;
+let fallSpeed = 1;
 
 // Event Listeners
 
@@ -33,6 +33,7 @@ instantiateWord();
 function random(e){
     return (Math.floor(Math.random() * e));
 }
+
 function noRefresh(e){
     e.preventDefault();
     playerInput.value = '';
@@ -86,8 +87,12 @@ function scrollText(e){
     }
 }
 
+function welcomeScreen(){
+    // function that loads welcome screen upon page load
+}
+
 function gameOver(){
-    
+    // function showing game over screen upon losing and prompts for retry
 }
 
 function gameStart(){
