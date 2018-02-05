@@ -1,5 +1,3 @@
-document.addEventListener('DOMContentLoaded', function(){
-
 gameStart();
 
 // Variables
@@ -10,7 +8,7 @@ const playerInputForm = document.getElementById('playerInputForm');
 const scoreText = document.getElementById('score');
 const livesText = document.getElementById('lives');
 const columnList = ['col1', 'col2', 'col3', 'col4', 'col5'];
-
+const scrollInterval = setInterval(scrollText, 10);
 
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
@@ -40,50 +38,54 @@ function noRefresh(e){
 }
 
 function instantiateWord() {
-    const para = document.createElement('p');
+    const newWord = document.createElement('p');
     const randomWord = challengeWords[random(challengeWords.length)]
-    const node = document.createTextNode(randomWord);
-    para.appendChild(node);
-    para.classList.add('currentWords'); 
-    para.classList.add('display-4', 'position-fixed', 'hidden-text');
+    const newWordText = document.createTextNode(randomWord);
+    newWord.appendChild(newWordText);
+    newWord.classList.add('currentWords'); 
+    newWord.classList.add('display-4', 'position-fixed');
     const randomColumnIndex = columnList[random(columnList.length)];
     const randomColumn = document.getElementById(randomColumnIndex);
-    randomColumn.appendChild(para);
-    scrollText(para);
+    randomColumn.appendChild(newWord);
+    const pos = windowHeight;
+    newWord.style.bottom = pos + 'px';
+    // scrollText(newWord);
 }
 
 function checkAnswer(e){
     e.preventDefault();
     const currentWords = document.getElementsByClassName('currentWords');
-    for(i = 0; i <= currentWords.length; i += 1){
-        console.log(currentWords[i].innerHTML);
+    for(i = 0; i <= (currentWords.length - 1); i += 1){
         if (currentWords[i] && playerInput.value === currentWords[i].innerHTML){
-            console.log('success');
             currentWords[i].parentNode.removeChild(currentWords[i]);
-            instantiateWord();
             playerInput.value = '';
             score += 1;
             scoreText.innerHTML = 'Score: ' + score;
+            instantiateWord();
         }
     }
 }
 
-function scrollText(e){
-    let pos = windowHeight;
-    const scrollInterval = setInterval(scroll, 10);
-    function scroll(){
-        if (pos <= -200 && e){
+function scrollText(){
+    const currentWords = document.getElementsByClassName('currentWords');
+    for(i = 0; i <= (currentWords.length - 1); i += 1){
+        let pos = currentWords[i].style.bottom.slice(0, -2);
+        pos = Number(pos);
+        if (pos <= -100){
+            currentWords[i].parentNode.removeChild(currentWords[i]);
+            currentWords.splice(i, 1);
             lives -= 1;
             livesText.innerHTML = 'Lives: ' + lives;
             if (lives <= 0){
                 gameOver();
+            } else {
+                instantiateWord();
             }
-            clearInterval(scrollInterval);
-            instantiateWord();
         } else {
             pos -= fallSpeed;
-            e.style.bottom = pos + 'px';
-        } 
+            currentWords[i].style.bottom = pos + 'px';
+        }
+        console.log(typeof(pos));
     }
 }
 
@@ -140,5 +142,3 @@ function gameStart(){
     footer.appendChild(form);
     form.appendChild(textInput);
 }
-
-});
