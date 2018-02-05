@@ -62,6 +62,9 @@ function checkAnswer(e){
             score += 1;
             scoreText.innerHTML = 'Score: ' + score;
             instantiateWord();
+            if (score % 10 === 0){
+                instantiateWord();
+            }
         }
     }
 }
