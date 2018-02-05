@@ -1,15 +1,24 @@
 // Variables
 
 // challengeWords[] has been moved to its own file for organization purposes
-const playerInputForm = document.getElementById('userInput');
+const playerInput = document.getElementById('playerInput');
+const playerInputForm = document.getElementById('playerInputForm');
+const scoreText = document.getElementById('score');
+const livesText = document.getElementById('lives');
+
+
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
+
 let wordId = 0;
 let score = 0;
+let lives = 3;
+let fallSpeed = 1;
 
 // Event Listeners
 
-playerInputForm.addEventListener('input', checkAnswer);
+playerInput.addEventListener('input', checkAnswer);
+playerInputForm.addEventListener('submit', noRefresh);
 
 // Initialize
 
@@ -19,6 +28,10 @@ instantiateWord();
 
 function random(e){
     return (Math.floor(Math.random() * e));
+}
+function noRefresh(e){
+    e.preventDefault();
+    playerInput.value = '';
 }
 
 function instantiateWord() {
@@ -32,28 +45,34 @@ function instantiateWord() {
     scrollText(para);
 }
 
-function checkAnswer(){
+function checkAnswer(e){
+    e.preventDefault();
     for(i = 0; i <= wordId; i += 1){
         const maybeWordId = document.getElementById(wordId.toString());
-        if (maybeWordId && playerInputForm.value === maybeWordId.innerHTML){
+        if (maybeWordId && playerInput.value === maybeWordId.innerHTML){
             console.log('success');
             maybeWordId.parentNode.removeChild(maybeWordId);
             instantiateWord();
-            playerInputForm.value = '';
+            playerInput.value = '';
             score += 1;
+            scoreText.innerHTML = 'Score: ' + score;
         }
     }
 }
 
 function scrollText(e){
     let pos = windowHeight;
-    var id = setInterval(scroll, 10);
+    const scrollInterval = setInterval(scroll, 10);
     function scroll(){
-        if (pos <= -200){
-            clearInterval(id);
+        if (pos <= -200 && e){
+            lives -= 1;
+            livesText.innerHTML = 'Lives: ' + lives;
+            clearInterval(scrollInterval);
+            instantiateWord();
         } else {
-            pos -= 5;
+            pos -= fallSpeed;
             e.style.bottom = pos + 'px';
-        }
+        } 
+        
     }
 }
