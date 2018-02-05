@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', function(){
+
+gameStart();
+
 // Variables
 
 // challengeWords[] has been moved to its own file for organization purposes
@@ -11,7 +15,6 @@ const columnList = ['col1', 'col2', 'col3', 'col4', 'col5'];
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
 
-let wordId = 0;
 let score = 0;
 let lives = 3;
 let fallSpeed = 5;
@@ -40,8 +43,7 @@ function instantiateWord() {
     const randomWord = challengeWords[random(challengeWords.length)]
     const node = document.createTextNode(randomWord);
     para.appendChild(node);
-    para.id = wordId;
-    wordId += 1;
+    para.classList.add('currentWords'); 
     para.classList.add('display-4', 'position-fixed', 'hidden-text');
     const randomColumnIndex = columnList[random(columnList.length)];
     const randomColumn = document.getElementById(randomColumnIndex);
@@ -51,11 +53,12 @@ function instantiateWord() {
 
 function checkAnswer(e){
     e.preventDefault();
-    for(i = 0; i <= wordId; i += 1){
-        const maybeWordId = document.getElementById(wordId.toString());
-        if (maybeWordId && playerInput.value === maybeWordId.innerHTML){
+    const currentWords = document.getElementsByClassName('currentWords');
+    for(i = 0; i <= currentWords.length; i += 1){
+        console.log(currentWords[i].innerHTML);
+        if (currentWords[i] && playerInput.value === currentWords[i].innerHTML){
             console.log('success');
-            maybeWordId.parentNode.removeChild(maybeWordId);
+            currentWords[i].parentNode.removeChild(currentWords[i]);
             instantiateWord();
             playerInput.value = '';
             score += 1;
@@ -86,3 +89,51 @@ function scrollText(e){
 function gameOver(){
     
 }
+
+function gameStart(){
+    const main = document.createElement('main');
+    main.id = 'main';
+    main.classList.add('h-70', 'row');
+    const body = document.getElementById('body');
+    body.appendChild(main);
+    for(i = 0; i <= 6; i += 1){
+        const div = document.createElement('div');
+        const divId = 'col' + i;
+        div.id = divId;
+        div.classList.add('h-100');
+        if (i === 0 || i === 6){
+            div.classList.add('col-md-1');
+        } else {
+            div.classList.add('col-md-2');
+        }
+        main.appendChild(div);
+    }
+    const pLives = document.createElement('p');
+    const pScore = document.createElement('p');
+    pLives.id = 'lives';
+    pScore.id = 'score';
+    const col0 = document.getElementById('col0');
+    col0.appendChild(pLives);
+    col0.appendChild(pScore);
+    pLivesText = document.createTextNode('Lives: 3');
+    pScoreText = document.createTextNode('Score: 0');
+    pLives.appendChild(pLivesText);
+    pScore.appendChild(pScoreText);
+
+    const footer = document.createElement('footer');
+    footer.classList.add('h-20');
+    body.appendChild(footer);
+    const form = document.createElement('form');
+    form.id = 'playerInputForm';
+    form.classList.add('inputForm', 'w-100', 'd-flex', 'justify-content-center');
+    form.autocomplete= 'off';
+    textInput = document.createElement('input');
+    textInput.type = 'text';
+    textInput.id = 'playerInput';
+    textInput.classList.add('display-4', 'bg-dark', 'text-green', 'w-100', 'text-center');
+    textInput.autofocus = 'true';
+    footer.appendChild(form);
+    form.appendChild(textInput);
+}
+
+});
