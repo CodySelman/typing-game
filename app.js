@@ -1,3 +1,4 @@
+const body = document.getElementById('body');
 gameStart();
 
 // Variables
@@ -7,6 +8,7 @@ const playerInput = document.getElementById('playerInput');
 const playerInputForm = document.getElementById('playerInputForm');
 const scoreText = document.getElementById('score');
 const livesText = document.getElementById('lives');
+
 const columnList = ['col1', 'col2', 'col3', 'col4', 'col5'];
 const scrollInterval = setInterval(scrollText, 10);
 
@@ -49,7 +51,6 @@ function instantiateWord() {
     randomColumn.appendChild(newWord);
     const pos = windowHeight;
     newWord.style.bottom = pos + 'px';
-    // scrollText(newWord);
 }
 
 function checkAnswer(e){
@@ -61,6 +62,8 @@ function checkAnswer(e){
             playerInput.value = '';
             score += 1;
             scoreText.innerHTML = 'Score: ' + score;
+            body.classList.add('success');
+            const flashTimer = setTimeout(removeFlash, 1000);
             instantiateWord();
             if (score % 10 === 0){
                 instantiateWord();
@@ -69,15 +72,22 @@ function checkAnswer(e){
     }
 }
 
+function removeFlash(){
+    body.classList.remove('success');
+    body.classList.remove('failure');
+}
+
 function scrollText(){
     const currentWords = document.getElementsByClassName('currentWords');
     for(i = 0; i <= (currentWords.length - 1); i += 1){
         let pos = currentWords[i].style.bottom.slice(0, -2);
         pos = Number(pos);
-        if (pos <= -100){
+        if (pos <= 0){
             currentWords[i].parentNode.removeChild(currentWords[i]);
             lives -= 1;
             livesText.innerHTML = 'Lives: ' + lives;
+            body.classList.add('failure');
+            const flashTimer = setTimeout(removeFlash, 1000);
             if (lives <= 0){
                 gameOver();
             } else {
@@ -102,7 +112,6 @@ function gameStart(){
     const main = document.createElement('main');
     main.id = 'main';
     main.classList.add('h-70', 'row');
-    const body = document.getElementById('body');
     body.appendChild(main);
     for(i = 0; i <= 6; i += 1){
         const div = document.createElement('div');

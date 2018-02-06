@@ -19,14 +19,6 @@ body, html {
     color: #33ff00;
 }
 
-.left-500{
-    left: -500px;
-}
-
-.hidden-text {
-    bottom: -500px;
-}
-
 .h-20 {
     height: 20%;
 }
@@ -37,4 +29,24 @@ body, html {
 
 .h-70 {
     height: 70%;
+}
+
+@keyframes success {
+    0% {background-color: #33ff00;}
+    100% {background-color: #282828;}
+}
+
+.success {
+    animation: success 1s;
+    animation-timing-function: ease-out;
+}
+
+@keyframes failure {
+    0% {background-color: red;}
+    100% {background-color: #282828;}
+}
+
+.failure {
+    animation: failure 1s;
+    animation-timing-function: ease-out;
 }
